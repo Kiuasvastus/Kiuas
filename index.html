@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="fi" data-lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="K.I.U.A.S. — Kulttuuriset, Iloiset, Urheat, Akateemiset Saunojat. Keskisuomalainen opiskelijoiden saunaseura Jyväskylässä.">
+
+<!-- Ikoni selaimen välilehdellä ja puhelimen kotinäytöllä -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+
+<!-- Linkin esikatselu WhatsAppissa, Telegramissa, Slackissa, somessa.
+     VAIHDA og:url ja og:image osoittamaan oikeaan osoitteeseen kun
+     sivusto on julkaistu — nämä on pakko olla täydellisiä URL-osoitteita. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fi_FI">
+<meta property="og:site_name" content="K.I.U.A.S.">
+<meta property="og:title" content="K.I.U.A.S. — Kulttuuriset, Iloiset, Urheat, Akateemiset Saunojat">
+<meta property="og:description" content="Keskisuomalainen opiskelijoiden saunaseura Jyväskylässä. Tapahtumat, jäsenyys ja yhteystiedot.">
+<meta property="og:url" content="https://kiuasvastus.github.io/Kiuas/">
+<meta property="og:image" content="https://kiuasvastus.github.io/Kiuas/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="K.I.U.A.S. -logo: kiuas, kiviä ja löylyä.">
+<meta name="twitter:card" content="summary_large_image">
+<title>Saunaseura K.I.U.A.S.</title>
+<style>
+  /* Fontit tarjoillaan sivustolta itseltään (kansio fonts/).
+     Google Fontsia ei käytetä: silloin kävijän IP-osoite ei päädy
+     Googlen palvelimille, eikä sivusto tarvitse evästeilmoitusta
+     fonttien takia. */
+  @font-face {
+    font-family: "Familjen Grotesk";
+    font-style: normal; font-weight: 500; font-display: swap;
+    src: url("fonts/familjen-grotesk-latin-500-normal.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Familjen Grotesk";
+    font-style: normal; font-weight: 600; font-display: swap;
+    src: url("fonts/familjen-grotesk-latin-600-normal.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Familjen Grotesk";
+    font-style: normal; font-weight: 700; font-display: swap;
+    src: url("fonts/familjen-grotesk-latin-700-normal.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal; font-weight: 400; font-display: swap;
+    src: url("fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "IBM Plex Sans";
+    font-style: normal; font-weight: 600; font-display: swap;
+    src: url("fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal; font-weight: 500; font-display: swap;
+    src: url("fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2");
+  }
+  /* ---------------------------------------------------------------
+     K.I.U.A.S. — etusivu (postikorttimalli)
+     Muokkausohje:
+       - Kaikki teksti on kahtena: <span lang="fi"> ja <span lang="en">.
+         Muokkaa molemmat, muuten toinen kieli näyttää vanhaa tekstiä.
+       - class="ph" = placeholder. Poista class kun teksti on oikea,
+         niin katkoviiva-alleviivaus häviää.
+       - Tapahtumat: kopioi yksi <article class="event"> ja muokkaa.
+     --------------------------------------------------------------- */
+
+  /* Sivu on tarkoituksella vain vaalea — se ei seuraa käyttöjärjestelmän
+     tummaa teemaa, jotta kaikki kävijät näkevät saman ilmeen. */
+  :root {
+    color-scheme: light;
+
+    /* Kaksi perusväriä: kiukaan hiillos ja avannon sininen.
+       Taustat vuorottelevat paperi / lämmin kaista — ne antavat
+       rytmin, eivät väitä mitään lämpötilasta. Lämpötilan kertoo
+       yksin oikean reunan mittari. */
+    --ground:        #3e2816;   /* saunan seinä — lämmin savustunut paneeli */
+    --on-wall:       #f5e6c7;   /* teksti suoraan seinää vasten */
+    --on-wall-soft:  #d9c5a0;
+    --line-wall:     rgba(255, 224, 178, .21);
+    --bar:           #2a1a0c;   /* yläpalkki ja footer — tummempi kuin seinä */
+    --surface:       #fdf6e4;
+    --surface-sunk:  #ddc49a;
+    --ink:           #1f1c17;
+    --ink-soft:      #4f4a3d;
+    --ink-faint:     #5c5646;   /* tummennettu, jotta kontrasti riittää
+                                   tummemmalla taustalla */
+    --line:          #cdb689;
+    --line-strong:   #b3945f;
+
+    /* avanto: sivun toinen perusväri, korostuksina */
+    --cold-line:     #b5c8d2;
+    --cold-deep:     #12495f;
+
+    /* lämpimät pinnat */
+    --hero-from:     #f0dfba;
+    --hero-to:       #e4cfa2;
+    --band:          #e8d4ac;   /* sama kuin muut — ei erillistä kaistaa */
+    --wood:          #d1b58a;
+    --wood-ink:      #7a5622;
+
+    /* kuuma ja kylmä: kiuas vs. avanto */
+    --ember:         #b0501c;
+    --ember-deep:    #8a3c12;
+    --accent:        #1c5f7c;
+    --accent-ink:    #ffffff;
+    --ph-bg:         rgba(28, 95, 124, .07);
+    --ph-line:       rgba(28, 95, 124, .45);
+
+    --f-display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    /* Saunan seinä: pystypaneeli koko sivun taustana. Sama kuvio kuin
+       lauteiden takana, mutta vaaleampi — lauteiden takana seinä on
+       varjossa, muualla valossa. */
+    background-color: var(--ground);
+    background-image:
+      repeating-linear-gradient(90deg,
+        rgba(0, 0, 0, .33) 0 1.5px,
+        rgba(255, 222, 176, .15) 1.5px 2.9px,
+        transparent 2.9px 17px),
+      linear-gradient(180deg, rgba(255, 212, 158, .12), rgba(0, 0, 0, .20));
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    /* Löylykauha hiiren osoittimena. Poista tämä rivi jos haluat tavallisen. */
+    cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEE0lEQVR4nMWWTWwbRRTH/zPjj3XcpHZC8VcSN7GTODYpKk1oCgcXRaVwQ4BPPYDEDVGp6oXeLDgUiTNCXHvppQghcYGQSBgpSGkiAVXjNCVO3Tgfzqed2PHau94ZDnGsUBqS2Nvyl+aw80bv/XZm3nsD/M8ih9j27KIynotIGDA8zVCZ/y/o4wd74psC4AAgRJRePP+dW+WKtdFCtn8em1nmXPxrnZ4ADIB2LtDuyivlq7kd5R0uuJdRKnHOCyDkr6YG6duOU5avfrw7u60XxB4ABcBDPd6LOzvF25LJ4OoPtSHoc8B2QkI2X0Q8sYLJqRRkRZ2xNZrf+3M6NaUHBKk4EWdD3kBmS57wuputn374hhryORiltLpDnHMxlVjRvrz1i/HRwsais9V6bnz80WrFR80QNBIBASC2cqUv7E1W682rb6t9XS5jXlbpRiZHVtczZCOTI3lZpX1dTuPNT95SWmxWz+py4QYAEd79gZpF79yBdunCmRcLReXNy691i9PuZsN6Jof0QhLziWmk5mYwn5hGeiGJ9Uwepz0thssXukVBVt+NRiOmGFBGHZlhAIBsYecUpdTiddmgaUKsLaewndmAwWgEAHDOkVlfhaZpaLE1knaXnTAK+/jo7ycBrNW1AwBgd5iXBRfbj5ezgjECuSCDMgpCSHVQRiEXZBgYFal0FpqG5PBYYq3io+YiRSMRsOHh+KYkGb7/6bcZkkpn1UCgGyAMiqJUBwhDINCF5NIm+eHXuJAkU0vA5wgC4AcVrqOomgWv9vk9K5u5ux0eu+vGR0NqT7ud7uS2iFJSiclsFNbGk+JBcpNGvxkhqrzNu9wSnZxT0tTEh2Zn0/EwYKjch2MDoALBX+5tC2Vzym3JZDhzvq8dL/ndsDVKyOaKuD+7hLE/kmhpgAgHLaTJAu1eSmOTc2raYuZD8Roh9t9eCoBHBgct91bnP9jKFd8XQDclsGpc5AkR9xsky9nBLskVdBMtXwRrMEObWtTYRKJ2iAN7ASHAtWsRy8OHD6T+F5rlz2/Fir3+9qBcKo8MdBpdoVamyQqYxVQfxNPyl4QBFtsFqVa4cBiGWAxlv98Z1Ep0dMBndIY89UMcVkD228We06DfGZR1gjh2BdMb4th1PAaUw4AhPpuOW8x8aCKhpqcWNWYxQZMVsJCHaQM+o1Mu0dGg3xncW68bgN4QNXcyvSDqaqV6QNQFoAeEbi/c42YHdiHKuj6xjwrBzLsNDACt+wj260jH0Wl0lkt0xO/1DAIQugIcBlEogfW1MuX1brNL1cQrzwTgQIgFjZ2QoHBQU48D1x8vLH0diYA9i/hV7d32Xp8j5G1zp68MdYjPrnRcB3ab2zMN/iRET6ez39vq/vi5Bt+n6lFHo/+sPX8DJdKbeuu5VWwAAAAASUVORK5CYII=") 4 4, auto;
+  }
+  a, button, summary, label { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEE0lEQVR4nMWWTWwbRRTH/zPjj3XcpHZC8VcSN7GTODYpKk1oCgcXRaVwQ4BPPYDEDVGp6oXeLDgUiTNCXHvppQghcYGQSBgpSGkiAVXjNCVO3Tgfzqed2PHau94ZDnGsUBqS2Nvyl+aw80bv/XZm3nsD/M8ih9j27KIynotIGDA8zVCZ/y/o4wd74psC4AAgRJRePP+dW+WKtdFCtn8em1nmXPxrnZ4ADIB2LtDuyivlq7kd5R0uuJdRKnHOCyDkr6YG6duOU5avfrw7u60XxB4ABcBDPd6LOzvF25LJ4OoPtSHoc8B2QkI2X0Q8sYLJqRRkRZ2xNZrf+3M6NaUHBKk4EWdD3kBmS57wuputn374hhryORiltLpDnHMxlVjRvrz1i/HRwsais9V6bnz80WrFR80QNBIBASC2cqUv7E1W682rb6t9XS5jXlbpRiZHVtczZCOTI3lZpX1dTuPNT95SWmxWz+py4QYAEd79gZpF79yBdunCmRcLReXNy691i9PuZsN6Jof0QhLziWmk5mYwn5hGeiGJ9Uwepz0thssXukVBVt+NRiOmGFBGHZlhAIBsYecUpdTiddmgaUKsLaewndmAwWgEAHDOkVlfhaZpaLE1knaXnTAK+/jo7ycBrNW1AwBgd5iXBRfbj5ezgjECuSCDMgpCSHVQRiEXZBgYFal0FpqG5PBYYq3io+YiRSMRsOHh+KYkGb7/6bcZkkpn1UCgGyAMiqJUBwhDINCF5NIm+eHXuJAkU0vA5wgC4AcVrqOomgWv9vk9K5u5ux0eu+vGR0NqT7ud7uS2iFJSiclsFNbGk+JBcpNGvxkhqrzNu9wSnZxT0tTEh2Zn0/EwYKjch2MDoALBX+5tC2Vzym3JZDhzvq8dL/ndsDVKyOaKuD+7hLE/kmhpgAgHLaTJAu1eSmOTc2raYuZD8Roh9t9eCoBHBgct91bnP9jKFd8XQDclsGpc5AkR9xsky9nBLskVdBMtXwRrMEObWtTYRKJ2iAN7ASHAtWsRy8OHD6T+F5rlz2/Fir3+9qBcKo8MdBpdoVamyQqYxVQfxNPyl4QBFtsFqVa4cBiGWAxlv98Z1Ep0dMBndIY89UMcVkD228We06DfGZR1gjh2BdMb4th1PAaUw4AhPpuOW8x8aCKhpqcWNWYxQZMVsJCHaQM+o1Mu0dGg3xncW68bgN4QNXcyvSDqaqV6QNQFoAeEbi/c42YHdiHKuj6xjwrBzLsNDACt+wj260jH0Wl0lkt0xO/1DAIQugIcBlEogfW1MuX1brNL1cQrzwTgQIgFjZ2QoHBQU48D1x8vLH0diYA9i/hV7d32Xp8j5G1zp68MdYjPrnRcB3ab2zMN/iRET6ez39vq/vi5Bt+n6lFHo/+sPX8DJdKbeuu5VWwAAAAASUVORK5CYII=") 4 4, pointer; }
+
+  .wrap {
+    width: 100%;
+    max-width: 1060px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* --- kielivaihto --------------------------------------------- */
+  :root[data-lang="fi"] [lang="en"] { display: none; }
+  :root[data-lang="en"] [lang="fi"] { display: none; }
+
+  /* --- placeholder-merkintä ------------------------------------ */
+  .ph {
+    background: var(--ph-bg);
+    border-bottom: 1px dashed var(--ph-line);
+    padding: 0 .15em;
+  }
+
+  /* --- yläpalkki ------------------------------------------------ */
+  header.bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--bar) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line-wall);
+  }
+  .bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-height: 84px;
+    padding-block: 10px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
+  .brand img { width: 66px; height: auto; display: block; }
+  .brand b {
+    font-family: var(--f-display);
+    color: var(--on-wall);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: .04em;
+  }
+  nav.links { display: flex; gap: 4px; }
+  nav.links a {
+    font-family: var(--f-display);
+    font-size: .98rem;
+    font-weight: 600;
+    letter-spacing: .01em;
+    text-decoration: none;
+    color: var(--on-wall);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: background-color .15s ease, color .15s ease;
+  }
+  nav.links a:hover { background: rgba(255, 240, 208, .16); color: #fff8e6; }
+
+  /* Kielivalinta = pieni saunan puukyltti */
+  .lang {
+    display: flex;
+    align-items: stretch;
+    border: 2px solid var(--wood-ink);
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #e3c795, #d1b58a);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 1px 2px rgba(60,40,10,.18);
+  }
+  .lang button {
+    font-family: var(--f-display);
+    font-size: .88rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    padding: 7px 14px;
+    border: 0;
+    background: transparent;
+    color: #573a0c;   /* tummempi kuin --wood-ink: kontrasti puupinnalla 5,3:1 */
+  }
+  .lang button + button { border-left: 1px solid rgba(122, 86, 34, .35); }
+  .lang button:hover { background: rgba(255, 252, 240, .35); }
+  .lang button[aria-pressed="true"] {
+    background: linear-gradient(180deg, var(--ember), var(--ember-deep));
+    color: #fdf3e2;
+    text-shadow: 0 1px 0 rgba(0,0,0,.25);
+  }
+  .lang button[aria-pressed="true"]:hover { background: linear-gradient(180deg, var(--ember), var(--ember-deep)); }
+
+  /* --- hero ----------------------------------------------------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    /* Hero on samaa seinää kuin muu sivu: ei omaa taustaväriä eikä
+       valaistusefektiä. Erottuminen tulee typografiasta. */
+    background: transparent;
+    color: var(--ink);
+  }
+  .hero-inner { position: relative; padding-block: 72px; }
+
+  /* Seuran nimikyltti: puulauta seinällä, samaa tekoa kuin mittarin
+     lauta. Hero erottuu esineenä, ei väripintana eikä valona. */
+  .sign {
+    position: relative;
+    padding: 44px 50px 42px;
+    border-radius: 20px;
+    border: 2px solid #6b4a1f;
+    background-color: #dcbb8b;
+    background-image:
+      radial-gradient(circle at 18px 18px, rgba(60,40,14,.55) 0 2.6px, rgba(255,246,225,.5) 2.6px 4px, transparent 4.2px),
+      radial-gradient(circle at calc(100% - 18px) 18px, rgba(60,40,14,.55) 0 2.6px, rgba(255,246,225,.5) 2.6px 4px, transparent 4.2px),
+      radial-gradient(circle at 18px calc(100% - 18px), rgba(60,40,14,.55) 0 2.6px, rgba(255,246,225,.5) 2.6px 4px, transparent 4.2px),
+      radial-gradient(circle at calc(100% - 18px) calc(100% - 18px), rgba(60,40,14,.55) 0 2.6px, rgba(255,246,225,.5) 2.6px 4px, transparent 4.2px),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.013 0.58' numOctaves='4' seed='6'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 .34 0 0 0 0 .22 0 0 0 0 .09 0 0 0 .28 0'/%3E%3C/filter%3E%3Crect width='300' height='200' filter='url(%23g)'/%3E%3C/svg%3E"),
+      linear-gradient(180deg, #e5c99c, #cbaa76);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 252, 235, .55),
+      inset 0 -2px 7px rgba(70, 45, 12, .20),
+      0 10px 26px rgba(0, 0, 0, .42);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.6rem, 7vw, 4.4rem);
+    font-weight: 700;
+    line-height: .98;
+    letter-spacing: -.01em;
+    margin-bottom: 18px;
+  }
+  .expansion {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: clamp(1.05rem, 2.2vw, 1.45rem);
+    line-height: 1.35;
+    color: var(--cold-deep);
+    margin: 0 0 22px;
+    max-width: 30ch;
+  }
+  /* Heron esittelylause on display-fontilla ja isompi kuin leipäteksti:
+     se on sivun ainoa myyntipuhe, joten se saa erottua. */
+  .hero p.lede {
+    margin: 0;
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: clamp(1.02rem, 1.5vw, 1.18rem);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 44ch;
+  }
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(107, 74, 31, .45);
+    font-family: var(--f-mono);
+    font-size: .78rem;
+    letter-spacing: .06em;
+    color: var(--ink-soft);
+  }
+
+  /* --- osiot ---------------------------------------------------- */
+  section { padding-block: 60px; background: transparent; }
+
+  /* Sisältö omassa pyöreäreunaisessa laatikossaan. Läpikuultava,
+     jotta seinäpaneeli näkyy hiukan läpi — mutta riittävän peittävä,
+     ettei kuvio häiritse lukemista. */
+  .room-card {
+    background: rgba(253, 246, 228, .86);
+    border: 1px solid rgba(255, 252, 240, .55);
+    border-radius: 22px;
+    padding: 34px 38px 38px;
+    box-shadow:
+      0 2px 12px rgba(60, 38, 10, .10),
+      inset 0 1px 0 rgba(255, 255, 255, .45);
+  }
+  h2 {
+    font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+    font-weight: 600;
+    margin-bottom: 22px;
+    padding-top: 18px;
+    position: relative;
+  }
+  h2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 46px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--ember);
+  }
+  .prose { max-width: 62ch; }
+  .prose p { margin: 0 0 16px; color: var(--ink-soft); }
+  .prose p:last-child { margin-bottom: 0; }
+
+  /* --- tapahtumat ----------------------------------------------- */
+
+  .events { display: grid; border-top: 1px solid var(--line-strong); }
+  .event {
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 150px 1fr auto;
+    gap: 24px;
+    align-items: baseline;
+    padding-block: 22px;
+  }
+  .event .when {
+    font-family: var(--f-mono);
+    font-size: .82rem;
+    letter-spacing: .04em;
+    color: var(--ember-deep);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .event h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 4px; }
+  .event p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+  .event .where {
+    font-family: var(--f-mono);
+    font-size: .76rem;
+    letter-spacing: .05em;
+    color: var(--ink-faint);
+    text-align: right;
+  }
+  .events-note { margin-top: 16px; font-size: .88rem; color: var(--ink-faint); }
+
+  /* --- liity + yhteys ------------------------------------------- */
+  .duo { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: stretch; }
+  .panel {
+    background: rgba(253, 246, 228, .86);
+    border: 1px solid rgba(255, 252, 240, .55);
+    border-radius: 22px;
+    padding: 32px 34px 36px;
+    box-shadow:
+      0 2px 12px rgba(60, 38, 10, .10),
+      inset 0 1px 0 rgba(255, 255, 255, .45);
+  }
+  .panel.sunk { background: rgba(233, 216, 181, .86); }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 12px 22px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: .95rem;
+  }
+  .cta:hover { filter: brightness(1.08); }
+
+  dl.contact { margin: 0; display: grid; gap: 16px; }
+  dl.contact dt {
+    font-family: var(--f-mono);
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);   /* ink-faint jäi alle 4,5:1 pienessä koossa */
+    margin-bottom: 2px;
+  }
+  dl.contact dd { margin: 0; }
+  dl.contact a { text-decoration-color: var(--accent); text-underline-offset: 3px; }
+
+  /* --- footer --------------------------------------------------- */
+  /* Footer on yläpalkin pari: sama läpikuultava pinta ja rajaviiva,
+     ei paneelikuviota. */
+  footer {
+    background: color-mix(in srgb, var(--bar) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--line-wall);
+    color: var(--on-wall-soft);
+    padding-block: 28px;
+    font-size: .85rem;
+  }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; }
+  footer .mark { display: flex; align-items: center; gap: 10px; color: var(--on-wall); font-weight: 600; }
+  footer .mark img { width: 30px; height: auto; }
+
+  /* --- lämpömittari (oikea reuna, leveät näytöt) ----------------- */
+  /* Toimii kahdessa roolissa: näyttää missä kohtaa sivua ollaan
+     (neste nousee vierityksen mukana) ja vie osioihin klikkaamalla.
+     Piilotetaan alle 1280px:n leveydellä — silloin yläpalkin
+     navigaatio hoitaa saman asian. */
+  .thermo { display: none; }
+
+  @media (min-width: 1280px) {
+    /* tilaa mittarille — kaistat jäävät silti täysleveiksi */
+    .wrap { max-width: 1250px; padding-right: 300px; }
+
+    .thermo {
+      display: block;
+      position: fixed;
+      right: 56px;
+      top: 50%;
+      transform: translateY(-50%);
+      height: min(640px, 78vh);
+      z-index: 15;
+    }
+    .thermo-rail { position: relative; height: 100%; }
+
+    /* lasiputki */
+    .thermo-glass {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 62px;
+      width: 34px;
+      border-radius: 17px 17px 6px 6px;
+      background:
+        linear-gradient(90deg,
+          rgba(255,255,255,.9) 0%,
+          rgba(255,255,255,.25) 26%,
+          rgba(120,100,70,.10) 60%,
+          rgba(255,255,255,.55) 100%),
+        var(--surface);
+      border: 1px solid rgba(90, 62, 24, .32);
+      box-shadow:
+        inset 0 0 10px rgba(90, 62, 24, .14),
+        0 2px 10px rgba(70, 48, 18, .12);
+      overflow: hidden;
+    }
+    /* kiiltoviiva */
+    .thermo-glass::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 12px;
+      bottom: 10px;
+      width: 5px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.25));
+      pointer-events: none;
+      z-index: 3;
+    }
+    /* neste: väri on sidottu putken korkeuteen, ei nesteen määrään,
+       joten sama kohta asteikolla on aina saman värinen. Pinta
+       rajataan clip-pathilla. */
+    .thermo-fill {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top,
+        #16658f 0%,
+        #3d90b3 11%,
+        #c0a377 21%,
+        #d98f3f 31%,
+        #c25f1c 46%,
+        var(--ember) 68%,
+        #d23c10 100%);
+      clip-path: inset(100% 0 0 0);
+      transition: clip-path .18s linear;
+      z-index: 1;
+    }
+    /* säiliö eli kupla — asteikon kylmä pää, jatkaa putken pohjan väriä */
+    .thermo-bulb {
+      --bulb: #1d6e97;
+      position: absolute;
+      right: -13px;
+      bottom: 0;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 34% 30%,
+        color-mix(in srgb, var(--bulb) 62%, white) 0%,
+        var(--bulb) 46%,
+        color-mix(in srgb, var(--bulb) 72%, black) 100%);
+      border: 1px solid rgba(90, 62, 24, .32);
+      box-shadow:
+        inset -3px -4px 10px rgba(0,0,0,.22),
+        inset 3px 4px 8px rgba(255,255,255,.30),
+        0 3px 12px color-mix(in srgb, var(--bulb) 45%, transparent);
+      transition: background .18s linear, box-shadow .18s linear;
+    }
+    .thermo-bulb::after {
+      content: "";
+      position: absolute;
+      left: 13px;
+      top: 11px;
+      width: 13px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.55);
+      filter: blur(1px);
+    }
+
+    /* pikkuviivat */
+    .thermo-ticks {
+      position: absolute;
+      right: 36px;
+      top: 0;
+      bottom: 62px;
+      width: 11px;
+      background-image: repeating-linear-gradient(
+        to top,
+        rgba(255, 232, 194, .40) 0 1px,
+        transparent 1px 10%);
+      pointer-events: none;
+    }
+
+    /* osiomerkinnät */
+    .thermo-marks { list-style: none; margin: 0; padding: 0; }
+    .thermo-marks li {
+      position: absolute;
+      right: 36px;
+      bottom: calc(62px + var(--t) * (100% - 62px));
+      transform: translateY(50%);
+    }
+    .thermo-marks a {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 9px;
+      padding: 6px 8px 6px 14px;
+      text-decoration: none;
+      color: var(--on-wall);
+      white-space: nowrap;
+      border-radius: 9px;
+      /* tumma tausta irrottaa tekstin seinäpaneelin raidoista */
+      background: rgba(26, 15, 5, .46);
+      border: 1px solid rgba(255, 232, 194, .14);
+      backdrop-filter: blur(2px);
+      transition: background-color .15s ease, border-color .15s ease;
+    }
+    .thermo-marks .lbl {
+      font-family: var(--f-display);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: .01em;
+    }
+    .thermo-marks .deg {
+      font-family: var(--f-mono);
+      font-size: .72rem;
+      color: rgba(245, 230, 199, .78);
+      font-variant-numeric: tabular-nums;
+    }
+    .thermo-marks .dash {
+      width: 18px;
+      height: 2px;
+      background: rgba(255, 230, 190, .45);
+      flex: none;
+    }
+    .thermo-marks a:hover { background: rgba(46, 28, 10, .72); border-color: rgba(255, 232, 194, .28); }
+    .thermo-marks a[aria-current="true"] {
+      color: #ffb07a;
+      background: rgba(120, 44, 12, .58);
+      border-color: rgba(240, 138, 74, .55);
+    }
+    .thermo-marks a[aria-current="true"] .lbl { font-weight: 700; }
+    .thermo-marks a[aria-current="true"] .deg { color: #ffc9a2; }
+    .thermo-marks a[aria-current="true"] .dash { background: #e8703a; height: 3px; }
+
+    /* yksikkö putken päällä */
+    .thermo-unit {
+      position: absolute;
+      right: 0;
+      top: -26px;
+      width: 34px;
+      text-align: center;
+      font-family: var(--f-mono);
+      font-size: .72rem;
+      color: var(--on-wall-soft);
+    }
+
+    section, .hero { scroll-margin-top: 96px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .thermo-fill, .thermo-bulb { transition: none; }
+  }
+
+  /* --- lauteet osioiden väleissä -------------------------------- */
+  /* Kukin osio "istuu" lauteella. Laude on sivua kapeampi ja kaventuu
+     taaksepäin, jolloin syntyy syvyysvaikutelma: takareuna on kauempana.
+     Lauteen ympärillä ja takana näkyy saunan seinäpaneeli. */
+  .bench {
+    position: relative;
+    height: 96px;
+    overflow: hidden;
+    --bl: 4%;    /* lauteen vasen reuna */
+    --br: 4%;    /* lauteen oikea reuna — kasvaa kun mittari on näkyvissä */
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='80'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.014 0.75' numOctaves='4' seed='11'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 .34 0 0 0 0 .22 0 0 0 0 .09 0 0 0 .30 0'/%3E%3C/filter%3E%3Crect width='300' height='80' filter='url(%23g)'/%3E%3C/svg%3E");
+
+    /* Ei omaa taustaa: sivun seinäpaneeli jatkuu lauteen takana
+       keskeytyksettä. Lauteen ympärille jää vain pehmeä varjo, joka
+       häipyy molemmista päistä nollaan — ei rajaviivaa. */
+    background-image:
+      linear-gradient(180deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, .06) 18%,
+        rgba(0, 0, 0, .14) 48%,
+        rgba(0, 0, 0, .06) 78%,
+        rgba(0, 0, 0, 0) 100%);
+  }
+
+  /* istuinpinta: kaventuu taaksepäin */
+  .bench i {
+    position: absolute;
+    left: var(--bl);
+    right: var(--br);
+    top: 6px;
+    height: 34px;
+    clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%);
+    background-image:
+      repeating-linear-gradient(180deg,
+        transparent 0 15.4px,
+        rgba(66, 42, 12, .50) 15.4px 17px),
+      var(--grain),
+      linear-gradient(180deg, #d8bb8c 0%, #e9d0a4 55%, #e3c89b 100%);
+    box-shadow: inset 0 -2px 3px rgba(74, 48, 16, .22);
+  }
+
+  /* etulauta */
+  .bench b {
+    position: absolute;
+    left: var(--bl);
+    right: var(--br);
+    top: 40px;
+    height: 17px;
+    border-radius: 0 0 3px 3px;
+    background-image: var(--grain), linear-gradient(180deg, #ab884f 0%, #8d6a3a 100%);
+    box-shadow:
+      inset 0 2px 5px rgba(40, 24, 4, .45),
+      inset 0 -1px 0 rgba(255, 244, 214, .22),
+      0 4px 10px rgba(40, 24, 4, .45);
+  }
+
+  /* tukijalat ja niiden varjo */
+  .bench u {
+    position: absolute;
+    left: var(--bl);
+    right: var(--br);
+    top: 57px;
+    bottom: 0;
+    background-image:
+      /* jalan vaalea sivu ja tumma etupinta */
+      repeating-linear-gradient(90deg,
+        transparent 0 272px,
+        rgba(150, 112, 58, .95) 272px 277px,
+        rgba(104, 72, 30, .98) 277px 302px,
+        rgba(56, 36, 12, .95) 302px 307px,
+        transparent 307px 330px),
+      linear-gradient(180deg,
+        rgba(0, 0, 0, .46) 0%,
+        rgba(0, 0, 0, .26) 38%,
+        rgba(0, 0, 0, .09) 72%,
+        rgba(0, 0, 0, 0) 100%);
+  }
+
+  /* Kun mittari on näkyvissä, laude loppuu ennen sen tekstejä.
+     Tämä sääntö on lauteen perusmäärittelyn jälkeen, jotta se voittaa. */
+  @media (min-width: 1280px) {
+    .bench { --br: 268px; }
+  }
+
+  /* ylälaude on paksumpi kuin muut */
+  .bench.wide { height: 112px; }
+  .bench.wide i { height: 42px; }
+  .bench.wide b { top: 48px; height: 20px; }
+  .bench.wide u { top: 68px; }
+
+  @media (max-width: 820px) {
+    .bench { height: 66px; }
+    .bench i { top: 4px; height: 24px; }
+    .bench b { top: 28px; height: 12px; }
+    .bench u { top: 40px; }
+    .bench.wide { height: 78px; }
+    .bench.wide i { height: 30px; }
+    .bench.wide b { top: 34px; height: 14px; }
+    .bench.wide u { top: 48px; }
+  }
+
+  /* --- kapeat näytöt -------------------------------------------- */
+  @media (max-width: 820px) {
+    .hero-inner { padding-block: 44px; }
+    .sign { padding: 30px 24px 30px; border-radius: 16px; }
+    .brand img { width: 52px; }
+    .bar-inner { min-height: 70px; }
+    .duo { grid-template-columns: 1fr; }
+    .event { grid-template-columns: 1fr; gap: 6px; }
+    .event .where { text-align: left; }
+    section { padding-block: 52px; }
+    .room-card { padding: 26px 22px 30px; border-radius: 18px; }
+    .panel { padding: 26px 22px 30px; }
+
+    /* Navigaatio siirtyy omalle rivilleen logon alle — ei piiloteta,
+       koska kapealla näytöllä mittariakaan ei ole. */
+    .bar-inner { flex-wrap: wrap; gap: 10px 12px; }
+    nav.links {
+      order: 3;
+      width: 100%;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      margin-inline: -4px;
+    }
+    nav.links::-webkit-scrollbar { display: none; }
+    nav.links a { font-size: .92rem; padding: 6px 10px; white-space: nowrap; }
+  }
+
+  @media (max-width: 430px) {
+    nav.links a { font-size: .86rem; padding: 5px 8px; }
+    .brand img { width: 46px; }
+    .brand b { font-size: 1.1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a class="brand" href="#top">
+      <img src="data:image/png;base64,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" alt="K.I.U.A.S. logo">
+      <b>K.I.U.A.S.</b>
+    </a>
+    <nav class="links">
+      <a href="#me"><span lang="fi">Keitä olemme</span><span lang="en">About</span></a>
+      <a href="#tapahtumat"><span lang="fi">Tapahtumat</span><span lang="en">Events</span></a>
+      <a href="#liity"><span lang="fi">Liity</span><span lang="en">Join</span></a>
+      <a href="#yhteys"><span lang="fi">Yhteystiedot</span><span lang="en">Contact</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Kieli / Language">
+      <button type="button" id="lang-fi" data-set-lang="fi" aria-pressed="true">FI</button>
+      <button type="button" id="lang-en" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<aside class="thermo" aria-label="Sivun osiot / Page sections">
+  <div class="thermo-rail">
+    <span class="thermo-unit">°C</span>
+    <div class="thermo-ticks" aria-hidden="true"></div>
+    <div class="thermo-glass" aria-hidden="true">
+      <div class="thermo-fill" id="thermoFill"></div>
+    </div>
+    <div class="thermo-bulb" aria-hidden="true"></div>
+    <!-- Merkinnät luodaan JS:llä yläpalkin navigaation perusteella.
+         Lisää tai poista linkki yläpalkista, niin mittari seuraa mukana. -->
+    <ol class="thermo-marks"></ol>
+  </div>
+</aside>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap hero-inner">
+      <div class="sign">
+        <h1>K.I.U.A.S.</h1>
+        <p class="expansion">
+          <span lang="fi">Kulttuuriset, Iloiset, Urheat, Akateemiset Saunojat</span>
+          <span lang="en">Kulttuuriset, Iloiset, Urheat, Akateemiset Saunojat</span>
+        </p>
+        <p class="lede"><span lang="fi">Keskisuomalainen poikkitieteellinen opiskelijoiden saunaseura, joka kokoontuu löylyyn, avantoon ja hyvään seuraan.</span>
+          <span lang="en">A cross-disciplinary student sauna society in Central Finland, gathering for löyly, ice swimming and good company.</span>
+        </p>
+        <div class="facts">
+          <span><span lang="fi">Perustettu 2025</span><span lang="en">Founded in 2025</span></span>
+          <span><span lang="fi">Jyväskylä</span><span lang="en">Jyväskylä, Finland</span></span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="bench wide" aria-hidden="true"><i></i><b></b><u></u></div>
+  <section id="me">
+    <div class="wrap">
+      <div class="room-card">
+        <h2><span lang="fi">Keitä olemme</span><span lang="en">Who we are</span></h2>
+        <div class="prose">
+          <p lang="fi">Seura sai alkunsa missäs muuallakaan, kuin saunan lauteilla. Löylyissä ystävykset kävivät läpi Jyväskylän opiskelijoiden ylläpitämiä seuroja ja tulivat siihen lopputulokseen, että saunaseura puuttuu kokonaan. Tähän piti tehdä muutos — ja näin syntyi K.I.U.A.S.</p>
+          <p lang="en">The society began where else but on the sauna benches. In the löyly, a group of friends went through the societies run by students in Jyväskylä and came to one conclusion: a sauna society was missing entirely. That had to change — and so K.I.U.A.S. was born.</p>
+          <p lang="fi">Perustajajäsenistö koostui niin kokeneista hallitustoimijoista kuin ensikertalaisistakin, mutta heitä kaikkia yhdisti yksi asia: saunan löylyistä nauttiminen. Ensimmäinen hallitus saatiin kasaan ja seuratoiminta aloitettiin vauhdilla keväällä 2025.</p>
+          <p lang="en">The founding members ranged from seasoned board veterans to complete first-timers, but one thing united them all: the love of löyly. The first board came together and the society started at full steam in spring 2025.</p>
+          <p lang="fi">Olemme poikkitieteellinen opiskelijoiden saunaseura, joka järjestää saunomiseen liittyviä tapahtumia lenkkisaunoista sitseihin. Toimimme ympäri vuoden ja ilmoitamme tapahtumista aktiivisesti somekanavissamme. Saunamme ovi on avoin kaikille!</p>
+          <p lang="en">We are a cross-disciplinary student sauna society, running everything from jogging saunas to sitsit. We are active all year round and announce our events on our social channels. Our sauna door is open to everyone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="bench" aria-hidden="true"><i></i><b></b><u></u></div>
+  <section id="tapahtumat">
+    <div class="wrap">
+      <div class="room-card">
+        <h2><span lang="fi">Tulevat tapahtumat</span><span lang="en">Upcoming events</span></h2>
+
+        <div class="prose">
+          <p lang="fi">Tapahtumakalenteri tulee tähän myöhemmin. Sillä välin ilmoitamme kaikista tapahtumista <a href="https://t.me/+NE0FNSpBNO5iY2Zk" target="_blank" rel="noopener">Telegramissa</a> ja <a href="https://www.instagram.com/k.i.u.a.s" target="_blank" rel="noopener">Instagramissa</a>.</p>
+          <p lang="en">The event calendar is coming here later. In the meantime we announce everything on <a href="https://t.me/+NE0FNSpBNO5iY2Zk" target="_blank" rel="noopener">Telegram</a> and <a href="https://www.instagram.com/k.i.u.a.s" target="_blank" rel="noopener">Instagram</a>.</p>
+        </div>
+    </div>
+    </div>
+  </section>
+
+
+  <div class="bench" aria-hidden="true"><i></i><b></b><u></u></div>
+  <section id="liity">
+    <div class="wrap duo">
+      <div class="panel">
+        <h2><span lang="fi">Liity jäseneksi</span><span lang="en">Join us</span></h2>
+        <div class="prose">
+          <p lang="fi">Jäsenyys on avoin kaikille opiskelijoille alasta riippumatta. Liittyminen tapahtuu Kide.appissa, jossa näet myös voimassa olevan jäsenmaksun.</p>
+          <p lang="en">Membership is open to every student, whatever they study. You join through Kide.app, where you will also find the current membership fee.</p>
+        </div>
+        <a class="cta" href="https://kide.app/memberships/496d7844-547e-409b-bb8b-db38f9d94e9d" target="_blank" rel="noopener">
+          <span lang="fi">Liity Kide.appissa</span><span lang="en">Join via Kide.app</span>
+        </a>
+      </div>
+
+      <div class="panel sunk" id="yhteys">
+        <h2><span lang="fi">Yhteystiedot</span><span lang="en">Get in touch</span></h2>
+        <dl class="contact">
+          <div>
+            <dt><span lang="fi">Sähköposti</span><span lang="en">Email</span></dt>
+            <!-- Osoite kootaan JS:llä, jotta roskapostirobotit eivät poimi sitä.
+                 Muokkaa data-user ja data-domain, älä näkyvää tekstiä. -->
+            <dd><a class="mail" href="#yhteys" data-user="hallitus" data-domain="kiuas.rocks">hallitus [at] kiuas.rocks</a></dd>
+          </div>
+          <div>
+            <dt><span lang="fi">Some</span><span lang="en">Social</span></dt>
+            <dd><a href="https://www.instagram.com/k.i.u.a.s" target="_blank" rel="noopener">Instagram</a> · <a href="https://t.me/+NE0FNSpBNO5iY2Zk" target="_blank" rel="noopener">Telegram</a></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <div class="bench" aria-hidden="true"><i></i><b></b><u></u></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mark">
+      <img src="data:image/png;base64,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" alt="">
+      <span>K.I.U.A.S.</span>
+    </span>
+    <span>
+      <span lang="fi">Kulttuuriset, Iloiset, Urheat, Akateemiset Saunojat</span>
+      <span lang="en">Kulttuuriset, Iloiset, Urheat, Akateemiset Saunojat</span>
+    </span>
+    <span>© 2026 K.I.U.A.S.</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var stored = null;
+    try { stored = localStorage.getItem('kiuas-lang'); } catch (e) {}
+    setLang(stored === 'en' ? 'en' : 'fi');
+
+    function setLang(lang) {
+      root.dataset.lang = lang;
+      root.setAttribute('lang', lang);
+      document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.setLang === lang));
+      });
+      try { localStorage.setItem('kiuas-lang', lang); } catch (e) {}
+    }
+
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.addEventListener('click', function () { setLang(b.dataset.setLang); });
+    });
+  })();
+
+  /* Lämpömittari: osiot ovat sivun järjestyksessä ylhäältä alas, ja
+     nestepinta laskee selatessa samaan suuntaan — kuuma löyly ylhäällä,
+     viileä avanto alhaalla. Toimii yhtä aikaa edistymispalkkina ja
+     sisällysluettelona. */
+  /* Sähköposti kootaan vasta selaimessa. Robotit lukevat HTML:n
+     sellaisenaan eivätkä näe valmista osoitetta. */
+  (function () {
+    document.querySelectorAll('a.mail').forEach(function (a) {
+      var addr = a.dataset.user + '@' + a.dataset.domain;
+      a.href = 'mailto:' + addr;
+      a.textContent = addr;
+    });
+  })();
+
+  /* Mittarin merkinnät luodaan yläpalkin navigaatiosta: yksi paikka
+     jota ylläpitää. Asteet ja korkeudet jaetaan tasan osioiden
+     kesken, joten uusi osio ei vaadi käsin numerointia. */
+  (function () {
+    var list = document.querySelector('.thermo-marks');
+    var navLinks = document.querySelectorAll('nav.links a');
+    if (!list || navLinks.length < 2) return;
+
+    var TOP_T = 0.90, BOTTOM_T = 0.22, TOP_DEG = 95, BOTTOM_DEG = 30;
+    var n = navLinks.length;
+
+    navLinks.forEach(function (src, i) {
+      var f = i / (n - 1);
+      var t = TOP_T - f * (TOP_T - BOTTOM_T);
+      var li = document.createElement('li');
+      li.style.setProperty('--t', t.toFixed(3));
+
+      var a = document.createElement('a');
+      a.href = src.getAttribute('href');
+      a.dataset.sec = src.getAttribute('href').slice(1);
+      a.dataset.t = t.toFixed(4);          /* merkinnän korkeus putkessa */
+
+      var lbl = document.createElement('span');
+      lbl.className = 'lbl';
+      lbl.innerHTML = src.innerHTML;
+
+      var deg = document.createElement('span');
+      deg.className = 'deg';
+      deg.textContent = Math.round(TOP_DEG - f * (TOP_DEG - BOTTOM_DEG)) + '°';
+
+      var dash = document.createElement('span');
+      dash.className = 'dash';
+
+      a.appendChild(lbl); a.appendChild(deg); a.appendChild(dash);
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+  })();
+
+  /* Nestepinta ja korostettu merkintä lasketaan SAMASTA kuvauksesta,
+     jotta ne eivät koskaan ole eri tahdissa: nestepinta osuu tarkalleen
+     merkinnän kohdalle juuri silloin kun se osio tulee näkyviin.
+
+     Kuvaus on paloittain lineaarinen. Solmupisteet ovat (vierityksen
+     osuus -> pinnan korkeus): sivun alku -> täysi putki, kunkin osion
+     alkukohta -> sen merkinnän korkeus, sivun loppu -> lähes tyhjä. */
+  (function () {
+    var fill = document.getElementById('thermoFill');
+    if (!fill) return;
+    var links = Array.prototype.slice.call(document.querySelectorAll('.thermo-marks a'));
+    if (!links.length) return;
+
+    var HEAD = 90;        /* kiinteän yläpalkin korkeus */
+    var MIN_GAP = 0.05;   /* solmupisteiden vähimmäisväli */
+    var END_LEVEL = 0.06; /* paljonko nestettä on sivun pohjalla */
+    var starts = [], ticking = false;
+
+    /* Vierityksen osuus, jossa kukin osio tulee ajankohtaiseksi. */
+    function measure() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if (max <= 0) { starts = []; return; }
+      var f = links.map(function (a) {
+        var el = document.getElementById(a.dataset.sec);
+        if (!el) return null;
+        return Math.min(1, Math.max(0,
+          (el.getBoundingClientRect().top + window.scrollY - HEAD) / max));
+      });
+      if (f.indexOf(null) !== -1) { starts = []; return; }
+
+      /* Lyhyellä sivulla viimeiset osiot osuvat samaan kohtaan. */
+      for (var i = 1; i < f.length; i++) {
+        if (f[i] < f[i - 1] + MIN_GAP) f[i] = f[i - 1] + MIN_GAP;
+      }
+      f[f.length - 1] = Math.min(f[f.length - 1], 1 - MIN_GAP);
+      for (var j = f.length - 2; j >= 0; j--) {
+        if (f[j] > f[j + 1] - MIN_GAP) f[j] = f[j + 1] - MIN_GAP;
+      }
+      if (f[0] < 0) f[0] = 0;
+      starts = f;
+    }
+
+    /* Paloittain lineaarinen kuvaus vierityksestä pinnan korkeuteen. */
+    function levelFor(p) {
+      if (!starts.length) return 1 - p * (1 - END_LEVEL);
+      var P = [0], L = [1];
+      starts.forEach(function (f, i) {
+        P.push(f);
+        L.push(parseFloat(links[i].dataset.t));
+      });
+      P.push(1); L.push(END_LEVEL);
+      for (var i = 1; i < P.length; i++) {
+        if (p <= P[i]) {
+          var span = P[i] - P[i - 1];
+          var k = span > 0 ? (p - P[i - 1]) / span : 0;
+          return L[i - 1] + (L[i] - L[i - 1]) * k;
+        }
+      }
+      return L[L.length - 1];
+    }
+
+    function update() {
+      ticking = false;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p = max > 0 ? window.scrollY / max : 0;
+      p = Math.max(0, Math.min(1, p));
+
+      var level = levelFor(p);
+      fill.style.clipPath = 'inset(' + ((1 - level) * 100).toFixed(2) + '% 0 0 0)';
+
+      /* Korostus vaihtuu tarkalleen samassa kohdassa kuin pinta
+         ohittaa merkinnän, koska molemmat lukevat samaa taulukkoa. */
+      var current = null;
+      starts.forEach(function (f, i) {
+        if (p >= f - 0.0005) current = links[i];
+      });
+      if (p > 0.985) current = links[links.length - 1];
+      links.forEach(function (a) {
+        if (a === current) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }
+
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+    function remeasure() { measure(); update(); }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', remeasure);
+    window.addEventListener('load', remeasure);
+    remeasure();
+  })();
+</script>
+
+</body>
+</html>

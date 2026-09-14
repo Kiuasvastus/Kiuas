@@ -1,0 +1,16 @@
+Tämän kansion fontit tarjoillaan sivustolta itseltään, ei Google Fontsista.
+Syy: kävijän IP-osoite ei silloin päädy kolmannelle osapuolelle.
+
+Fontit ja lisenssit
+-------------------
+Familjen Grotesk   — SIL Open Font License 1.1  (LICENSE-Familjen-Grotesk.txt)
+IBM Plex Sans      — SIL Open Font License 1.1  (LICENSE-IBM-Plex.txt)
+IBM Plex Mono      — SIL Open Font License 1.1  (LICENSE-IBM-Plex.txt)
+
+OFL sallii käytön verkkosivulla myös kaupallisesti ja maksutta.
+Ehto: lisenssitiedostot pidetään mukana kun fonttitiedostoja
+jaetaan edelleen — siksi ne ovat tässä kansiossa. Fontteja ei saa
+myydä sellaisenaan eikä julkaista niitä toisella nimellä.
+
+Tiedostot ovat samat kuin Google Fontsin jakamat; ne on haettu
+fontsource-paketeista (npm).
